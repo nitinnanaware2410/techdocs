@@ -3,7 +3,18 @@ import streamlit as st
 from keys.openAIkey import openai_key
 import os
 
+import sys
 
+
+# Set the path for 'keys' folder
+if getattr(sys, 'frozen', False):  # This checks if running as an executable
+    app_path = os.path.dirname(sys.executable)
+else:
+    app_path = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the path to the keys folder and import the key
+key_file_path = os.path.join(app_path, 'keys', 'openAIkey.py')
+sys.path.append(os.path.join(app_path, 'keys'))  # Add keys folder to sys path
 # Set your OpenAI API key
 openai.api_key = openai_key
 
